@@ -64,14 +64,70 @@ namespace ExopiWordleTests
             wordle.GameLoop();
 
             //Assert
-            Assert.IsFalse(wordle.Running);
+            Assert.IsTrue(wordle.Ran);
             mockConsole.VerifyAll();
         }
 
 
-            
-        
-}
+        [TestMethod]
+        public void GameLoop_Ends_After_Correct_Guess_Is_Made_First_Try()
+        {
+            //Arrange
+            string answer = "crash";
+            var mockConsole = new Mock<IConsole>();
+            List<string> dictionary = new List<string>(["crash"]);
+            Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
+            mockConsole.Setup(m => m.ReadLine()).Returns("crash");
+
+            //Act
+            wordle.GameLoop();
+
+            //Assert
+            Assert.IsTrue(wordle.Ran);
+            mockConsole.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GameLoop_Ends_After_Correct_Guess_Is_Made_Second_Try()
+        {
+            //Arrange
+            string answer = "crash";
+            var mockConsole = new Mock<IConsole>();
+            List<string> dictionary = new List<string>(["smash", "crash"]);
+            Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
+            mockConsole.SetupSequence(m => m.ReadLine()).Returns("smash").Returns("crash");
+
+            //Act
+            wordle.GameLoop();
+
+            //Assert
+            Assert.IsTrue(wordle.Ran);
+            mockConsole.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GameLoop_Ends_After_Correct_Guess_Is_Made_Fifth_Try()
+        {
+            //Arrange
+            string answer = "crash";
+            var mockConsole = new Mock<IConsole>();
+            List<string> dictionary = new List<string>(["smash", "crash"]);
+            Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
+            mockConsole.SetupSequence(m => m.ReadLine()).Returns("smash").Returns("smash")
+                .Returns("smash").Returns("smash").Returns("crash");
+
+            //Act
+            wordle.GameLoop();
+
+            //Assert
+            Assert.IsTrue(wordle.Ran);
+            mockConsole.VerifyAll();
+        }
+
+
+
+
+    }
 
     }
 

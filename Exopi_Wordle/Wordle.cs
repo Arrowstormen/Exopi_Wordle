@@ -10,8 +10,8 @@ namespace ExopiWordle
         private IConsole _console;
         private string _answer;
         private List<string> _dictionary;
-        private int _attempts = 0;
-        public bool Running = false;
+        private int _attemptsLeft = 6; //Change to make harder/easier.
+        public readonly bool Ran = false;
 
         public Wordle(IConsole console, string answer, List<string> dictionary)
         {
