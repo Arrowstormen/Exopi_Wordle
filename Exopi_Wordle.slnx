@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Exopi_Wordle/Exopi_Wordle.csproj" />
+  <Project Path="Exopi_WordleTests/Exopi_WordleTests.csproj" />
+</Solution>
