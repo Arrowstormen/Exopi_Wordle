@@ -2,7 +2,7 @@
 using ExopiWordle;
 using ExopiWordle.Consoles;
 
-namespace Exopi_WordleTests
+namespace ExopiWordleTests
 {
     [TestClass]
     public sealed class TestConsole : IConsole
