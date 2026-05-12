@@ -124,7 +124,22 @@ namespace ExopiWordleTests
             mockConsole.VerifyAll();
         }
 
+        [TestMethod]
+        public void IsGuessValid_Returns_False_When_More_Than_Five_Characters()
+        {
+            //Arrange
+            string answer = "crash";
+            var testConsole = new TestConsole();
+            List<string> dictionary = new List<string>(["smash", "crash"]);
+            Wordle wordle = new Wordle(testConsole, answer, dictionary);
+            string guess = "fungus";
 
+            //Act
+            var result = wordle.IsGuessValid(guess);
+
+            //Assert
+            Assert.IsFalse(result);
+        }
 
 
     }

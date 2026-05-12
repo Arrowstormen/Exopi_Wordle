@@ -33,7 +33,7 @@ namespace ExopiWordle
 
         public bool IsGuessValid(string guess) 
         {
-            return true;
+            throw new NotImplementedException();
         }
     }
 }
