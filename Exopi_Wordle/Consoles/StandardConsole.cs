@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack.Consoles
+namespace ExopiWordle.Consoles
 {
     public class StandardConsole : IConsole
     {
