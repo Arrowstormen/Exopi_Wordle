@@ -27,9 +27,14 @@ namespace ExopiWordle
 
         }
 
-        public void StartingGameInfo()
+        public string StartingGameInfo()
         {
+            throw new NotImplementedException();
+        }
 
+        public string EndGameInfo()
+        {
+            throw new NotImplementedException();
         }
 
         public bool IsGuessValid(string guess) 

@@ -41,11 +41,10 @@ namespace ExopiWordleTests
             Wordle wordle = new Wordle(console, answer, dictionary);
 
             //Act
-            wordle.StartingGameInfo();
+            string actual = wordle.StartingGameInfo();
 
             //Assert
             string expected = "A NEW GAME HAS STARTED. PLEASE INPUT A FIVE LETTER WORD AS A GUESS.";
-            string actual = console.output[0];
             Assert.AreEqual(expected, actual);
         }
 
@@ -367,6 +366,45 @@ namespace ExopiWordleTests
 
             //Assert
             Assert.AreEqual("YRGGG", actual);
+        }
+
+        [TestMethod]
+        public void EndGameInfo_Returns_Expected_Message_When_Losing()
+        {
+            //Arrange
+            string answer = "crash";
+            var mockConsole = new Mock<IConsole>();
+            List<string> dictionary = new List<string>(["smash"]);
+            Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
+            mockConsole.SetupSequence(m => m.ReadLine()).Returns("smash").Returns("smash").Returns("smash")
+                .Returns("smash").Returns("smash").Returns("smash");
+
+            //Act
+            wordle.GameLoop();
+            string actual = wordle.EndGameInfo();
+
+            //Assert
+            string expected = "GAME OVER";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void EndGameInfo_Returns_Expected_Message_When_Winning()
+        {
+            //Arrange
+            string answer = "crash";
+            var mockConsole = new Mock<IConsole>();
+            List<string> dictionary = new List<string>(["crash"]);
+            Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
+            mockConsole.Setup(m => m.ReadLine()).Returns("crash");
+
+            //Act
+            wordle.GameLoop();
+            string actual = wordle.EndGameInfo();
+
+            //Assert
+            string expected = "YOU WIN!";
+            Assert.AreEqual(expected, actual);
         }
 
     }
