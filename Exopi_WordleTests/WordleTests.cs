@@ -32,7 +32,6 @@ namespace ExopiWordleTests
         [TestMethod]
         public void StartingGameInfo_Is_As_Expected()
         {
-            //SHOULD PROBABLY JUST BE A CONSTANT UNLESS MORE THAN ONE LINE, OR LOGIC IS INTRODUCED.
 
             //Arrange
             string answer = "crash";
@@ -58,6 +57,25 @@ namespace ExopiWordleTests
             Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
             mockConsole.SetupSequence(m => m.ReadLine()).Returns("smash").Returns("smash").Returns("smash")
                 .Returns("smash").Returns("smash").Returns("smash");
+
+            //Act
+            wordle.GameLoop();
+
+            //Assert
+            Assert.IsTrue(wordle.Ran);
+            mockConsole.VerifyAll();
+        }
+
+        [TestMethod]
+        public void GameLoop_Invalid_Guesses_Do_Not_Use_Attempts()
+        {
+            //Arrange
+            string answer = "crash";
+            var mockConsole = new Mock<IConsole>();
+            List<string> dictionary = new List<string>(["smash"]);
+            Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
+            mockConsole.SetupSequence(m => m.ReadLine()).Returns("flash").Returns("smash").Returns("smash")
+                .Returns("flappy").Returns("smash").Returns("smash").Returns("smash").Returns("smash");
 
             //Act
             wordle.GameLoop();
@@ -391,6 +409,9 @@ namespace ExopiWordleTests
         [TestMethod]
         public void EndGameInfo_Returns_Expected_Message_When_Winning()
         {
+            //The fact that this test relies on GameLoop is probably bad practice, 
+            // but making AnswerGuessed not readonly seems like bad practice too.
+
             //Arrange
             string answer = "crash";
             var mockConsole = new Mock<IConsole>();
