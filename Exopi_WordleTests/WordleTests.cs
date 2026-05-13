@@ -143,7 +143,7 @@ namespace ExopiWordleTests
         }
 
         [TestMethod]
-        public void GameLoop_Sets_AnswerGuessed_As_True_After_Correct_Guess_Is_Made()
+        public void GameLoop_AnswerGuessed_Is_True_After_Correct_Guess_Is_Made()
         {
             //Arrange
             string answer = "crash";
@@ -161,7 +161,7 @@ namespace ExopiWordleTests
         }
 
         [TestMethod]
-        public void GameLoop_Sets_AnswerGuessed_As_False_After_End_With_No_Correct_Guess()
+        public void GameLoop_AnswerGuessed_Is_False_After_End_With_No_Correct_Guess()
         {
             //Arrange
             string answer = "crash";
