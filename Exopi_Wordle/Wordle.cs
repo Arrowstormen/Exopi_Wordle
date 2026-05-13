@@ -12,6 +12,7 @@ namespace ExopiWordle
         private List<string> _dictionary;
         private int _attemptsLeft = 6; //Change to make harder/easier.
         public readonly bool Ran = false;
+        public readonly bool AnswerGuessed = false;
 
         public Wordle(IConsole console, string answer, List<string> dictionary)
         {
@@ -35,5 +36,16 @@ namespace ExopiWordle
         {
             throw new NotImplementedException();
         }
+
+        public bool IsGuessCorrect(string guess)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string DetermineHints(string guess) 
+        {
+            return "";
+        }
+
     }
 }
