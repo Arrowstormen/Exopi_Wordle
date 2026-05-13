@@ -302,37 +302,71 @@ namespace ExopiWordleTests
         }
 
         [TestMethod]
-        public void IsGuessCorrect_Returns_False_When_Guess_Incorrect()
+        public void DetermineHints_Returns_GGGGG_When_Guess_Correct()
         {
             //Arrange
             string answer = "crash";
             var testConsole = new TestConsole();
-            List<string> dictionary = new List<string>(["smash", "crash"]);
-            Wordle wordle = new Wordle(testConsole, answer, dictionary);
-            string guess = "smash";
-
-            //Act
-            var result = wordle.IsGuessCorrect(guess);
-
-            //Assert
-            Assert.IsFalse(result);
-        }
-
-        [TestMethod]
-        public void IsGuessCorrect_Returns_True_When_Guess_Correct()
-        {
-            //Arrange
-            string answer = "crash";
-            var testConsole = new TestConsole();
-            List<string> dictionary = new List<string>(["smash", "crash"]);
+            List<string> dictionary = new List<string>(["crash"]);
             Wordle wordle = new Wordle(testConsole, answer, dictionary);
             string guess = "crash";
 
             //Act
-            var result = wordle.IsGuessCorrect(guess);
+            var actual = wordle.DetermineHints(guess);
 
             //Assert
-            Assert.IsTrue(result);
+            Assert.AreEqual("GGGGG", actual);
+        }
+
+        [TestMethod]
+        public void DetermineHints_Returns_RRRRR_When_Expected()
+        {
+            //Arrange
+            string answer = "crash";
+            var testConsole = new TestConsole();
+            List<string> dictionary = new List<string>(["crash", "dweeb"]);
+            Wordle wordle = new Wordle(testConsole, answer, dictionary);
+            string guess = "dweeb";
+
+            //Act
+            var actual = wordle.DetermineHints(guess);
+
+            //Assert
+            Assert.AreEqual("RRRRR", actual);
+        }
+
+        [TestMethod]
+        public void DetermineHints_Returns_YYGYY_When_Expected()
+        {
+            //Arrange
+            string answer = "crash";
+            var testConsole = new TestConsole();
+            List<string> dictionary = new List<string>(["crash", "hsarc"]);
+            Wordle wordle = new Wordle(testConsole, answer, dictionary);
+            string guess = "hsarc";
+
+            //Act
+            var actual = wordle.DetermineHints(guess);
+
+            //Assert
+            Assert.AreEqual("YYGYY", actual);
+        }
+
+        [TestMethod]
+        public void DetermineHints_Returns_YRGGG_When_Expected()
+        {
+            //Arrange
+            string answer = "crash";
+            var testConsole = new TestConsole();
+            List<string> dictionary = new List<string>(["crash", "smash"]);
+            Wordle wordle = new Wordle(testConsole, answer, dictionary);
+            string guess = "smash";
+
+            //Act
+            var actual = wordle.DetermineHints(guess);
+
+            //Assert
+            Assert.AreEqual("YRGGG", actual);
         }
 
     }

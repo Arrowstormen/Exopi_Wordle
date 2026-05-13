@@ -37,11 +37,6 @@ namespace ExopiWordle
             throw new NotImplementedException();
         }
 
-        public bool IsGuessCorrect(string guess)
-        {
-            throw new NotImplementedException();
-        }
-
         public string DetermineHints(string guess) 
         {
             return "";
