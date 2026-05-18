@@ -24,7 +24,7 @@ namespace ExopiWordle
 
         public void GameLoop()
         {
-            StartingGameInfo();
+            _console.WriteLine(StartingGameInfo());
             while (_attemptsLeft > 0 && !AnswerGuessed)
             {
                 bool guessValid = false;
@@ -51,7 +51,7 @@ namespace ExopiWordle
 
             }
             Ran = true;
-            EndGameInfo();
+            _console.WriteLine(EndGameInfo());
         }
 
         public string StartingGameInfo()

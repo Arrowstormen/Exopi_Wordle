@@ -4,7 +4,8 @@ using ExopiWordle.Consoles;
 
 StandardConsole console = new StandardConsole();
 Quitter quitter = new Quitter(console);
-//To Do: Parser
+string fileName = "../../../Data/Words.txt";
+List<string> dictionary = File.ReadAllLines(fileName).ToList();
 
 console.WriteLine("Console Wordle in C#\r");
 console.WriteLine("------------------------\n");
@@ -16,6 +17,9 @@ console.WriteLine("You have a total of 6 attempts each game.\n");
 
 while (!quitter.quit)
 {
+    string answer = dictionary[new Random().Next(dictionary.Count)];
+    Wordle wordle = new Wordle(console, answer, dictionary);
+    wordle.GameLoop();
     quitter.QuitOrContinue();
 }
    
