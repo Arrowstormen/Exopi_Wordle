@@ -183,7 +183,7 @@ namespace ExopiWordleTests
             //Arrange
             string answer = "crash";
             var mockConsole = new Mock<IConsole>();
-            List<string> dictionary = new List<string>(["crash"]);
+            List<string> dictionary = new List<string>(["crash", "smash"]);
             Wordle wordle = new Wordle(mockConsole.Object, answer, dictionary);
             mockConsole.SetupSequence(m => m.ReadLine()).Returns("smash").Returns("smash").Returns("smash")
                .Returns("smash").Returns("smash").Returns("smash");

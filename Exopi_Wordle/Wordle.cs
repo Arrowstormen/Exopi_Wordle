@@ -11,7 +11,7 @@ namespace ExopiWordle
         private string _answer;
         private List<string> _dictionary;
         private int _attemptsLeft = 6;
-        public readonly bool Ran = false;
+        public bool Ran { get; private set; }
         public bool AnswerGuessed { get; private set; }
 
         public Wordle(IConsole console, string answer, List<string> dictionary)
@@ -25,23 +25,22 @@ namespace ExopiWordle
         public void GameLoop()
         {
             StartingGameInfo();
-            while (_attemptsLeft > 0 || !AnswerGuessed)
+            while (_attemptsLeft > 0 && !AnswerGuessed)
             {
                 bool guessValid = false;
-                string verifiedGuess = String.Empty;
+                string playerGuess = String.Empty;
                 while (!guessValid)
                 {
-                    string playerGuess = _console.ReadLine().ToLower();
+                    playerGuess = _console.ReadLine().ToLower();
                     if (IsGuessValid(playerGuess))
                     {
                         guessValid = true;
-                        verifiedGuess = playerGuess;
                     }
                 }
 
-                _console.WriteLine(DetermineHints(verifiedGuess));
+                _console.WriteLine(DetermineHints(playerGuess));
                 _attemptsLeft--;
-                if (DetermineHints(verifiedGuess) == "GGGGG")
+                if (DetermineHints(playerGuess) == "GGGGG")
                 {
                     AnswerGuessed = true;
                 }
@@ -51,7 +50,7 @@ namespace ExopiWordle
                 }
 
             }
-
+            Ran = true;
             EndGameInfo();
         }
 
