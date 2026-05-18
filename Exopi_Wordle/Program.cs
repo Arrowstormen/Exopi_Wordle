@@ -1,7 +1,10 @@
 ﻿// Display title as the C# console Wordle app.
+using ExopiWordle;
 using ExopiWordle.Consoles;
 
 StandardConsole console = new StandardConsole();
+Quitter quitter = new Quitter(console);
+//To Do: Parser
 
 console.WriteLine("Console Wordle in C#\r");
 console.WriteLine("------------------------\n");
@@ -11,5 +14,8 @@ console.WriteLine("Y (short for Yellow) means the letter appears in the word, bu
 console.WriteLine("R (short for Red) means the letter does not appear in the word at all.");
 console.WriteLine("You have a total of 6 attempts each game.\n");
 
-//To Do: Parser
-//To Do: Quitter
+while (!quitter.quit)
+{
+    quitter.QuitOrContinue();
+}
+   
